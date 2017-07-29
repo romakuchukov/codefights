@@ -1,3 +1,4 @@
+//https://codefights.com/challenge/tuX9NefHfwnPBFZoW
 const l = ["....", "AB..", ".C..", "...."];
 const a = 'RDL';
 
@@ -5,9 +6,7 @@ const letters = (/\w/g);
 const dots = (/\./g);
 
 function transpose(a) {
-    return Object.keys(a[0]).map((c) => {
-        return a.map((r) => { return r[c]; });
-    });
+    return Object.keys(a[0]).map((c) => a.map((r) => r[c]));
 }
 function arrayPrep(mtx) {
     let arr = [[]];
@@ -19,9 +18,7 @@ function arrayPrep(mtx) {
         });
     });
 
-    return transpose(arr).map((v) => {
-        return v.join('');
-    });
+    return transpose(arr).map((v) => v.join(''));
 }
 function shift(arr, reg1, reg2) {
     let W;
@@ -30,9 +27,7 @@ function shift(arr, reg1, reg2) {
         W = elm.match(reg1) ? elm.match(reg1) : [];
         D = elm.match(reg2) ? elm.match(reg2) : [];
         return W.concat(D);
-    }).map((elm) => {
-        return elm.join('');
-    });
+    }).map((elm) => elm.join(''));
 }
 function run(type, lock) {
     let snacks = {
