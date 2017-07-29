@@ -1,45 +1,33 @@
 const l = [
-"A.B",
-"...",
-"C.D"];
-["...",
- ".AB",
- ".CD"]
-
-// const l = [
-// '....',
-// 'AB..',
-// '.C..',
-// '....',
-// 'ABCD'];
-
-'ABCD'
-'AC..'
-'.B..'
-'....'
-'....'
-
-'....'
-'....'
-'.B..'
-'AC..'
-'ABCD'
+"U...Z",
+"....C",
+"ABCD."
+];
 
 
-const a = 'DR';
+const a = 'L';
 
 const letters = (/\w/g);
 const dots = (/\./g);
 
-
-function transpose(mtx) {
-  return mtx.map((x, i) => {
-    return mtx.map((x) => {
-      return x[i];
+function transpose(a) {
+    return Object.keys(a[0]).map(function(c) {
+        return a.map(function(r) { return r[c]; });
     });
-  }).map((v) => {
-    return v.join('');
-  });
+}
+function arrayPrep(mtx) {
+    var arr = [[]];
+    var M = mtx;
+    M.map((v, j) => {
+        arr[j] = [];
+        v.split('').map((s, i) => {
+            arr[j][i] = v[i];
+        });
+    });
+
+    return transpose(arr).map(function(v){
+        return v.join('');
+    });
 };
 
 function shift(arr, reg1, reg2) {
@@ -53,8 +41,6 @@ function shift(arr, reg1, reg2) {
         return elm.join('');
     });
 }
-
-var lc;
 
 function runDir(type, lock) {
     var snacks = {
@@ -73,33 +59,23 @@ function shiftLeft(lock) {
     return shift(lock, letters, dots);
 }
 function shiftDown(lock) {
-    let down = transpose(lock);
+    let down = arrayPrep(lock);
     down = shift(down, dots, letters);
-    down = transpose(down);
+    down = arrayPrep(down);
     return down;
 }
 function shiftUp(lock) {
-    let up = transpose(lock);
+    let up = arrayPrep(lock);
     up = shift(up, letters, dots);
-    up = transpose(up);
+    up = arrayPrep(up);
     return up;
 }
 
-((lock, actions) => {
-    //counter();
-    const up = shiftUp(lock);
-    const down = shiftDown(lock);
+(function (lock, actions) {
     var newLock;
-    a.split('').map(function(val) {
+    //transpose(lock);
+    actions.split('').map(function(val) {
         newLock = runDir(val, lock);
     });
-
     console.log(newLock);
-    //const right = shiftRight(lock);
-    //const left = shiftLeft(lock);
-    // console.log(lock);
-    // console.log(down);
-    // console.log(up);
-    //console.log(right);
-    //console.log(left);
 })(l, a);
