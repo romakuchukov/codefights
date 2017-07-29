@@ -5,7 +5,7 @@ const l = [
 ];
 
 
-const a = 'L';
+const a = 'LD';
 
 const letters = (/\w/g);
 const dots = (/\./g);
@@ -72,10 +72,10 @@ function shiftUp(lock) {
 }
 
 (function (lock, actions) {
-    var newLock;
+    var newLock = lock;
     //transpose(lock);
     actions.split('').map(function(val) {
-        newLock = runDir(val, lock);
+        newLock = runDir(val, newLock);
     });
     console.log(newLock);
 })(l, a);
