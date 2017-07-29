@@ -1,23 +1,17 @@
-const l = [
-"U...Z",
-"....C",
-"ABCD."
-];
-
-
-const a = 'LD';
+const l = ["....", "AB..", ".C..", "...."];
+const a = 'RDL';
 
 const letters = (/\w/g);
 const dots = (/\./g);
 
 function transpose(a) {
-    return Object.keys(a[0]).map(function(c) {
-        return a.map(function(r) { return r[c]; });
+    return Object.keys(a[0]).map((c) => {
+        return a.map((r) => { return r[c]; });
     });
 }
 function arrayPrep(mtx) {
-    var arr = [[]];
-    var M = mtx;
+    let arr = [[]];
+    const M = mtx;
     M.map((v, j) => {
         arr[j] = [];
         v.split('').map((s, i) => {
@@ -25,11 +19,10 @@ function arrayPrep(mtx) {
         });
     });
 
-    return transpose(arr).map(function(v){
+    return transpose(arr).map((v) => {
         return v.join('');
     });
-};
-
+}
 function shift(arr, reg1, reg2) {
     let W;
     let D;
@@ -41,9 +34,8 @@ function shift(arr, reg1, reg2) {
         return elm.join('');
     });
 }
-
-function runDir(type, lock) {
-    var snacks = {
+function run(type, lock) {
+    let snacks = {
         'R': shiftRight(lock),
         'L': shiftLeft(lock),
         'D': shiftDown(lock),
@@ -51,7 +43,6 @@ function runDir(type, lock) {
     };
     return snacks[type];
 }
-
 function shiftRight(lock) {
     return shift(lock, dots, letters);
 }
@@ -71,11 +62,13 @@ function shiftUp(lock) {
     return up;
 }
 
-(function (lock, actions) {
-    var newLock = lock;
-    //transpose(lock);
-    actions.split('').map(function(val) {
-        newLock = runDir(val, newLock);
+function secretArchivesLock(lock, actions) {
+    let newLock = lock;
+    actions.split('').map((val) => {
+        newLock = run(val, newLock);
     });
     console.log(newLock);
-})(l, a);
+    return newLock;
+}
+
+secretArchivesLock(l, a);
