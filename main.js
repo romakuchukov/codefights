@@ -1,16 +1,35 @@
-const l = ['....', 'AB..', '.C..', '....', 'ABCD'];
+const l = [
+'....',
+'AB..',
+'.C..',
+'....',
+'ABCD'];
+
+'ABCD'
+'AC..'
+'.B..'
+'....'
+'....'
+
+'....'
+'....'
+'.B..'
+'AC..'
+'ABCD'
+
+
 const a = 'RDL';
 
 const letters = (/\w/g);
 const dots = (/\./g);
 
 
-let transpose = function transpose(m) {
-  return m.map(function (x, i) {
-    return m.map(function (x) {
+function transpose(mtx) {
+  return mtx.map((x, i) => {
+    return mtx.map((x) => {
       return x[i];
     });
-  }).map(function (v) {
+  }).map((v) => {
     return v.join('');
   });
 };
@@ -53,18 +72,26 @@ function shiftLeft(lock) {
     return shift(lock, dots, letters);
 }
 function shiftDown(lock) {
-
+    let down = transpose(lock);
+    down = shift(down, dots, letters);
+    down = transpose(down);
+    return down;
 }
 function shiftUp(lock) {
-
+    let up = transpose(lock);
+    up = shift(up, letters, dots);
+    up = transpose(up);
+    return up;
 }
 
 ((lock, actions) => {
-    //const trp = transpose(lock);
-    const right = shiftRight(lock);
-    const left = shiftLeft(lock);
+    const up = shiftUp(lock);
+    const down = shiftDown(lock);
+    //const right = shiftRight(lock);
+    //const left = shiftLeft(lock);
 
-    //console.log(trp);
-    console.log(right);
-    console.log(left);
+    console.log(down);
+    console.log(up);
+    //console.log(right);
+    //console.log(left);
 })(l, a);
