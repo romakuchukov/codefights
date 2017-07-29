@@ -1,9 +1,17 @@
 const l = [
-'....',
-'AB..',
-'.C..',
-'....',
-'ABCD'];
+"A.B",
+"...",
+"C.D"];
+["...",
+ ".AB",
+ ".CD"]
+
+// const l = [
+// '....',
+// 'AB..',
+// '.C..',
+// '....',
+// 'ABCD'];
 
 'ABCD'
 'AC..'
@@ -18,7 +26,7 @@ const l = [
 'ABCD'
 
 
-const a = 'RDL';
+const a = 'DR';
 
 const letters = (/\w/g);
 const dots = (/\./g);
@@ -46,30 +54,23 @@ function shift(arr, reg1, reg2) {
     });
 }
 
-// var switchcase = function switchcase(cases) {
-//   return function (defaultCase) {
-//     return function (key) {
-//       return key in cases ? cases[key] : defaultCase;
-//     };
-//   };
-// };
+var lc;
 
-// var counter = function counter() {
-//   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-//   var action = arguments[1];
-//   return switchcase({
-//     'R': shiftRight,
-//     'L': shiftLeft,
-//     'D': shiftDown,
-//     'U': shiftUp,
-//   })(state)(action.type);
-// };
+function runDir(type, lock) {
+    var snacks = {
+        'R': shiftRight(lock),
+        'L': shiftLeft(lock),
+        'D': shiftDown(lock),
+        'U': shiftUp(lock),
+    };
+    return snacks[type];
+}
 
 function shiftRight(lock) {
-    return shift(lock, letters, dots);
+    return shift(lock, dots, letters);
 }
 function shiftLeft(lock) {
-    return shift(lock, dots, letters);
+    return shift(lock, letters, dots);
 }
 function shiftDown(lock) {
     let down = transpose(lock);
@@ -85,13 +86,20 @@ function shiftUp(lock) {
 }
 
 ((lock, actions) => {
+    //counter();
     const up = shiftUp(lock);
     const down = shiftDown(lock);
+    var newLock;
+    a.split('').map(function(val) {
+        newLock = runDir(val, lock);
+    });
+
+    console.log(newLock);
     //const right = shiftRight(lock);
     //const left = shiftLeft(lock);
-
-    console.log(down);
-    console.log(up);
+    // console.log(lock);
+    // console.log(down);
+    // console.log(up);
     //console.log(right);
     //console.log(left);
 })(l, a);
