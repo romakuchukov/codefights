@@ -1,6 +1,6 @@
-//https://codefights.com/challenge/tuX9NefHfwnPBFZoW
-const l = ["....", "AB..", ".C..", "...."];
-const a = 'RDL';
+// https://codefights.com/challenge/tuX9NefHfwnPBFZoW
+// const l = ["....", "AB..", ".C..", "...."];
+// const a = 'RDL';
 
 const letters = (/\w/g);
 const dots = (/\./g);
@@ -66,4 +66,4 @@ function secretArchivesLock(lock, actions) {
     return newLock;
 }
 
-secretArchivesLock(l, a);
+// secretArchivesLock(l, a);
