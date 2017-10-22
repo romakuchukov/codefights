@@ -10,33 +10,33 @@ function transpose(a) {
 }
 function arrayPrep(mtx) {
     let arr = [[]];
-    const M = mtx;
-    M.map((v, j) => {
-        arr[j] = [];
-        v.split('').map((s, i) => {
-            arr[j][i] = v[i];
+    const matrix = mtx;
+    matrix.map((value, indx) => {
+        arr[indx] = [];
+        value.split('').map((s, i) => {
+            arr[indx][i] = value[i];
         });
     });
 
-    return transpose(arr).map((v) => v.join(''));
+    return transpose(arr).map((value) => value.join(''));
 }
-function shift(arr, reg1, reg2) {
-    let W;
-    let D;
-    return arr.map((elm) => {
-        W = elm.match(reg1) ? elm.match(reg1) : [];
-        D = elm.match(reg2) ? elm.match(reg2) : [];
-        return W.concat(D);
+function shift(array, reg1, reg2) {
+    let letters;
+    let dots;
+    return array.map((elm) => {
+        letters = elm.match(reg1) ? elm.match(reg1) : [];
+        dots = elm.match(reg2) ? elm.match(reg2) : [];
+        return letters.concat(dots);
     }).map((elm) => elm.join(''));
 }
 function run(type, lock) {
-    let snacks = {
+    let directions = {
         'R': shiftRight(lock),
         'L': shiftLeft(lock),
         'D': shiftDown(lock),
         'U': shiftUp(lock),
     };
-    return snacks[type];
+    return directions[type];
 }
 function shiftRight(lock) {
     return shift(lock, dots, letters);
