@@ -8,17 +8,16 @@ const dots = (/\./g);
 function transpose(a) {
     return Object.keys(a[0]).map((c) => a.map((r) => r[c]));
 }
-function arrayPrep(mtx) {
-    let arr = [[]];
-    const matrix = mtx;
+function arrayPrep(matrix) {
+    let doubleArray = [[]];
     matrix.map((value, indx) => {
-        arr[indx] = [];
+        doubleArray[indx] = [];
         value.split('').map((s, i) => {
-            arr[indx][i] = value[i];
+            doubleArray[indx][i] = value[i];
         });
     });
 
-    return transpose(arr).map((value) => value.join(''));
+    return transpose(doubleArray).map((value) => value.join(''));
 }
 function shift(array, reg1, reg2) {
     let letters;
